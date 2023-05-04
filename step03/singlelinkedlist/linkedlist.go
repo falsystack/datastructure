@@ -82,6 +82,9 @@ func (l *LinkedList[T]) GetAt(idx int) *Node[T] {
 }
 
 func (l *LinkedList[T]) InsertAfter(node *Node[T], value T) {
+	if !l.isIncluded(node) {
+		return
+	}
 	newNode := &Node[T]{
 		Value: value,
 	}
@@ -93,4 +96,18 @@ func (l *LinkedList[T]) InsertAfter(node *Node[T], value T) {
 
 	// 上の三つのラインを簡略化
 	node.next, newNode.next = newNode, node.next
+
+	if node == l.tail {
+		l.tail = newNode
+	}
+}
+
+func (l *LinkedList[T]) isIncluded(node *Node[T]) bool {
+	inner := l.root
+	for ; inner != nil; inner = inner.next {
+		if inner == node {
+			return true
+		}
+	}
+	return false
 }

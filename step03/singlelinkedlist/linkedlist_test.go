@@ -59,3 +59,18 @@ func TestPushFront(t *testing.T) {
 
 	assert.Equal(t, 3, l.O1Count())
 }
+
+func TestInsertAfter(t *testing.T) {
+	var l LinkedList[int]
+
+	l.PushBack(1)
+	l.PushBack(2)
+	l.PushBack(3)
+
+	node := l.GetAt(1)
+	l.InsertAfter(node, 4)
+
+	assert.Equal(t, 4, l.O1Count())
+	assert.Equal(t, 4, l.GetAt(2).Value)
+	assert.Equal(t, 3, l.Back().Value)
+}
