@@ -138,3 +138,15 @@ func (l *LinkedList[T]) findPrevNode(node *Node[T]) *Node[T] {
 	}
 	return nil
 }
+
+func (l *LinkedList[T]) PopFront() {
+	if l.root == nil {
+		return
+	}
+
+	l.root, l.root.next = l.root.next, nil
+	if l.root == nil {
+		l.tail = nil
+	}
+	l.count--
+}
