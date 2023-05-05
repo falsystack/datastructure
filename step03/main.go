@@ -1,6 +1,6 @@
 package main
 
-import "algorithmAndDataStrructure/step02/countingsort"
+import "algorithmAndDataStrructure/step03/countingsort"
 
 func main() {
 	//countingsort.Solution01()
