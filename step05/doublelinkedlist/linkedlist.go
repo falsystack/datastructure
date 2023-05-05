@@ -13,6 +13,24 @@ type LinkedList[T any] struct {
 	count int
 }
 
+func (l *LinkedList[T]) PushFront(val T) {
+	node := &Node[T]{
+		Value: val,
+	}
+
+	if l.root == nil {
+		l.root = node
+		l.tail = node
+		l.count = 1
+		return
+	}
+
+	l.root.prev = node
+	node.next = l.root
+	l.root = node
+	l.count++
+}
+
 func (l *LinkedList[T]) PushBack(val T) {
 	node := &Node[T]{
 		Value: val,
