@@ -13,6 +13,53 @@ type LinkedList[T any] struct {
 	count int
 }
 
+func (l *LinkedList[T]) InsertBefore(node *Node[T], val T) {
+	if !l.isIncluded(node) {
+		return
+	}
+
+	newNode := &Node[T]{
+		Value: val,
+	}
+	l.count++
+
+	prevNode := node.prev
+	node.prev = newNode
+
+	prevNode.next = newNode
+	if node.next != nil {
+		node.next = newNode
+	}
+}
+
+func (l *LinkedList[T]) isIncluded(node *Node[T]) bool {
+	inner := l.root
+	for ; inner != nil; inner = inner.next {
+		if inner == node {
+			return true
+		}
+	}
+	return false
+}
+
+func (l *LinkedList[T]) InsertAfter(node *Node[T], val T) {
+	if !l.isIncluded(node) {
+		return
+	}
+
+	newNode := &Node[T]{
+		Value: val,
+	}
+	nextNode := node.next
+	node.next = newNode
+
+	newNode.next = nextNode
+	newNode.prev = node
+
+	nextNode.prev = newNode
+	l.count++
+}
+
 func (l *LinkedList[T]) PushFront(val T) {
 	node := &Node[T]{
 		Value: val,
