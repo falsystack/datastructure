@@ -97,8 +97,8 @@ func (l *LinkedList[T]) InsertAfter(node *Node[T], value T) {
 	// 上の三つのラインを簡略化
 	node.next, newNode.next = newNode, node.next
 
-	if node == l.tail {
-		l.tail = newNode
+	if node.next != nil {
+		node.next = newNode
 	}
 }
 
