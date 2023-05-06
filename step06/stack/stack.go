@@ -17,5 +17,5 @@ func (s *Stack[T]) Push(val T) {
 }
 
 func (s *Stack[T]) Pop() T {
-	return s.l.PopBack().Value()
+	return s.l.PopBack().Value
 }
