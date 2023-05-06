@@ -25,11 +25,11 @@
   - 엣지가 단방향
 - Double Linked List(go/container)
   - 엣지가 양방향
-- Cache Miss가 잘일어남. (고도의 밀집화된 데이터의 처리를 할 때 굉장히 비효율적이다.)
+- Cache Miss 가 잘일어남. (고도의 밀집화된 데이터의 처리를 할 때 굉장히 비효율적이다.)
 - 요소가 사라질 때 GC가 일어남
 
 # 결론
 대부분 배열(Array)를 사용하는것이 좋다.
 - 단 요소수가 많고 맨 앞에서 삽입 / 삭제가 빈번한 큐는 Linked List사용 고려
   - 사용예: 대기열(FIFO)
-- 멀티 쓰레드 환경에서 Lockfree Queue등도 고려
+- 멀티 쓰레드 환경에서 Lock free Queue 등도 고려
