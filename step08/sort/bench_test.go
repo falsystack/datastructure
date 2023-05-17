@@ -26,3 +26,11 @@ func BenchmarkMergeSort(b *testing.B) {
 
 	MergeSort(arr)
 }
+
+// とんでもなく遅い O(N^2)
+func BenchmarkBinaryInsertSort(b *testing.B) {
+	arr := make([]int, b.N)
+	for i := 0; i < b.N; i++ {
+		arr = BinaryInsertSort(arr, rand.Intn(b.N))
+	}
+}
