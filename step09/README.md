@@ -29,3 +29,17 @@
   - 複合できない。
 - 簡単なCheckSum用度で使用される関数
   - `crc32.ChecksumIEEE([]byte(key))`
+
+## Sorted Map
+- Sortされた状態を維持
+- Binary Insert Sortを使用
+
+### Sorted Mapの速度
+- 追加: `O(N)`
+- 照会: `O(logN)`
+- 削除: `O(N)`
+
+### Sorted Mapを使う理由
+- Sorted状態を維持したい時
+- Dense Data
+- Cacheに優里
