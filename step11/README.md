@@ -17,3 +17,15 @@ type TreeNode[T any] struct {
 - Postorder(子 -> 現)
 ### Breadth first traversal, Breadth first search(幅優先探索, BFS)
 
+## Binary Tree
+- 子ノードを二つのみ持つTree
+- **Binary Search Tree**, <- **一番重要**
+- Heap Tree
+
+```go
+type TreeNode[T any] struct {
+	Value T
+	Left *TreeNode[T]
+    Right *TreeNode[T]
+}
+```
