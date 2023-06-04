@@ -101,3 +101,30 @@ func (l *LinkedList[T]) isInclude(node *Node[T]) bool {
 	}
 	return false
 }
+
+func (l *LinkedList[T]) InsertBefore(node *Node[T], value T) {
+	if node == l.root {
+		l.PushFront(value)
+		return
+	}
+	prevNode := l.findPrevNode(node)
+	if prevNode == nil {
+		return
+	}
+
+	newNode := &Node[T]{
+		Value: value,
+	}
+	l.count++
+
+	newNode.next, prevNode.next = node, newNode
+}
+
+func (l *LinkedList[T]) findPrevNode(node *Node[T]) *Node[T] {
+	for i := l.root; i != nil; i = i.next {
+		if i.next == node {
+			return i
+		}
+	}
+	return nil
+}
