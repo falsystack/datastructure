@@ -6,14 +6,16 @@ type Node[T any] struct {
 }
 
 type LinkedList[T any] struct {
-	root *Node[T] // 最初のrootノード
-	tail *Node[T] // 一番最後のノード
+	root  *Node[T] // 最初のrootノード
+	tail  *Node[T] // 一番最後のノード
+	count int
 }
 
 func (l *LinkedList[T]) PushBack(value T) {
 	node := &Node[T]{
 		Value: value,
 	}
+	l.count++
 
 	if l.root == nil {
 		l.root = node
@@ -29,6 +31,7 @@ func (l *LinkedList[T]) PushFront(value T) {
 	node := &Node[T]{
 		Value: value,
 	}
+	l.count++
 
 	if l.root == nil {
 		l.root = node
@@ -46,4 +49,55 @@ func (l *LinkedList[T]) Front() *Node[T] {
 
 func (l *LinkedList[T]) Back() *Node[T] {
 	return l.tail
+}
+
+// O(N)
+func (l *LinkedList[T]) Count() int {
+	cnt := 0
+	for node := l.root; node != nil; node = node.next {
+		cnt++
+	}
+	return cnt
+}
+
+// O(1)
+func (l *LinkedList[T]) Count2() int {
+	return l.count
+}
+
+// GetAt 特定インデックスのノードを返す
+func (l *LinkedList[T]) GetAt(idx int) *Node[T] {
+	if idx >= l.Count2() {
+		return nil
+	}
+	j := 0
+	for i := l.root; i != nil; i = i.next {
+		if idx == j {
+			return i
+		}
+		j++
+	}
+	return nil
+}
+
+func (l *LinkedList[T]) InsertAfter(node *Node[T], value T) {
+	if !l.isInclude(node) {
+		return
+	}
+
+	newNode := &Node[T]{
+		Value: value,
+	}
+	l.count++
+
+	newNode.next, node.next = node.next, newNode
+}
+
+func (l *LinkedList[T]) isInclude(node *Node[T]) bool {
+	for i := l.root; i != nil; i = i.next {
+		if i == node {
+			return true
+		}
+	}
+	return false
 }
