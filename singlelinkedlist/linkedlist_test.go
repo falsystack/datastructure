@@ -134,3 +134,27 @@ func TestLinkedList_PopFront(t *testing.T) {
 	assert.Equal(t, 0, l.Count2())
 
 }
+
+func TestLinkedList_Remove(t *testing.T) {
+	var l LinkedList[int]
+
+	l.PushBack(1)
+	l.PushBack(2)
+	l.PushBack(3)
+	assert.Equal(t, 3, l.Count2())
+
+	l.Remove(l.GetAt(2))
+	assert.Equal(t, 2, l.Count2())
+	assert.Equal(t, 1, l.Front().Value)
+	assert.Equal(t, 2, l.Back().Value)
+
+	l.Remove(l.GetAt(0))
+	assert.Equal(t, 1, l.Count2())
+	assert.Equal(t, 2, l.Front().Value)
+	assert.Equal(t, 2, l.Back().Value)
+
+	l.Remove(l.GetAt(0))
+	assert.Equal(t, 0, l.Count2())
+	assert.Nil(t, l.Front())
+	assert.Nil(t, l.Back())
+}

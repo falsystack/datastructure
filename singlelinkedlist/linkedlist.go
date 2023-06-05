@@ -143,3 +143,23 @@ func (l *LinkedList[T]) PopFront() {
 	l.root.next, l.root = nil, l.root.next
 	l.count--
 }
+
+// TODO: PopBack作ってみよう
+
+func (l *LinkedList[T]) Remove(node *Node[T]) {
+	if node == l.root {
+		l.PopFront()
+		return
+	}
+
+	prevNode := l.findPrevNode(node)
+	if prevNode == nil {
+		return
+	}
+
+	prevNode.next, node.next = node.next, nil
+	if node == l.tail {
+		l.tail = prevNode
+	}
+	l.count--
+}
