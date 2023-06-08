@@ -91,9 +91,19 @@ func (l *LinkedList[T]) InsertAfter(node *Node[T], val T) {
 		Value: val,
 	}
 	l.count++
-	
+
+	next := node.next
+
 	node.next, newNode.next = newNode, node.next
-	newNode.prev, node.next.prev = node, newNode
+	if next != nil {
+		next.prev = newNode
+	}
+	newNode.prev = node
+
+	if node == l.tail {
+		l.tail = newNode
+	}
+
 }
 
 func (l *LinkedList[T]) isIncluded(node *Node[T]) bool {
@@ -103,4 +113,27 @@ func (l *LinkedList[T]) isIncluded(node *Node[T]) bool {
 		}
 	}
 	return false
+}
+
+func (l *LinkedList[T]) InsertBefore(node *Node[T], val T) {
+	if !l.isIncluded(node) {
+		return
+	}
+
+	newNode := &Node[T]{
+		Value: val,
+	}
+	l.count++
+
+	prev := node.prev
+
+	node.prev, newNode.prev = newNode, node.prev
+	if prev != nil {
+		prev.next = newNode
+	}
+	if node == l.root {
+		l.root = newNode
+	}
+	newNode.next = node
+
 }
