@@ -29,3 +29,7 @@ func (l *LinkedList[T]) PushBack(val T) {
 	l.tail.next = newNode
 	l.tail = newNode
 }
+
+func (l *LinkedList[T]) Front() *Node[T] {
+	return l.root
+}
