@@ -42,3 +42,23 @@ func (l *LinkedList[T]) Back() *Node[T] {
 func (l *LinkedList[T]) Count() int {
 	return l.count
 }
+
+func (l *LinkedList[T]) GetAt(idx int) *Node[T] {
+	if idx == l.count-1 {
+		return l.tail
+	}
+
+	if idx >= l.count {
+		return nil
+	}
+
+	cnt := 0
+	for i := l.root; i != nil; i = i.next {
+		if idx == cnt {
+			return i
+		}
+		cnt++
+	}
+
+	return nil
+}
