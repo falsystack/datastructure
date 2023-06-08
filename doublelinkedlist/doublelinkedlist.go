@@ -137,3 +137,22 @@ func (l *LinkedList[T]) InsertBefore(node *Node[T], val T) {
 	newNode.next = node
 
 }
+
+func (l *LinkedList[T]) PopFront() *Node[T] {
+	if l.root == nil {
+		return nil
+	}
+
+	root := l.root
+
+	l.root = root.next
+	if l.root != nil {
+		l.root.prev = nil
+	} else {
+		l.tail = nil
+	}
+	root.next = nil
+
+	l.count--
+	return root
+}
