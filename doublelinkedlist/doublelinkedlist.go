@@ -62,3 +62,45 @@ func (l *LinkedList[T]) GetAt(idx int) *Node[T] {
 
 	return nil
 }
+
+func (l *LinkedList[T]) PushFront(val T) {
+	newNode := &Node[T]{
+		Value: val,
+	}
+	l.count++
+
+	if l.root == nil {
+		l.root = newNode
+		l.tail = newNode
+		return
+	}
+	l.root.prev, l.root, newNode.next = newNode, newNode, l.root
+}
+
+func (l *LinkedList[T]) InsertAfter(node *Node[T], val T) {
+	if !l.isIncluded(node) {
+		return
+	}
+
+	// new()関数を使うのがいいのか&Type{},
+	// Composite Literalを使うのがいいのか疑問
+	// ネットで調べても明確な回答ななさそう。
+	// newNode := new(Node[T])
+	// newNode.Value = val
+	newNode := &Node[T]{
+		Value: val,
+	}
+	l.count++
+	
+	node.next, newNode.next = newNode, node.next
+	newNode.prev, node.next.prev = node, newNode
+}
+
+func (l *LinkedList[T]) isIncluded(node *Node[T]) bool {
+	for i := l.root; i != nil; i = i.next {
+		if i == node {
+			return true
+		}
+	}
+	return false
+}
