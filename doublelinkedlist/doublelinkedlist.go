@@ -33,3 +33,7 @@ func (l *LinkedList[T]) PushBack(val T) {
 func (l *LinkedList[T]) Front() *Node[T] {
 	return l.root
 }
+
+func (l *LinkedList[T]) Back() *Node[T] {
+	return l.tail
+}
