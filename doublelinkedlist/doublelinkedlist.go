@@ -27,6 +27,7 @@ func (l *LinkedList[T]) PushBack(val T) {
 	}
 
 	l.tail.next = newNode
+	newNode.prev = l.tail
 	l.tail = newNode
 }
 
@@ -36,4 +37,8 @@ func (l *LinkedList[T]) Front() *Node[T] {
 
 func (l *LinkedList[T]) Back() *Node[T] {
 	return l.tail
+}
+
+func (l *LinkedList[T]) Count() int {
+	return l.count
 }

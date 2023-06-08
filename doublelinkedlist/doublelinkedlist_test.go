@@ -25,8 +25,7 @@ func TestLinkedList_PushBack(t *testing.T) {
 	assert.Equal(t, 1, l.Front().Value)
 	assert.Equal(t, 3, l.Back().Value)
 
-	//assert.Equal(t, 3, l.Count())
-	//assert.Equal(t, 3, l.Count2())
+	assert.Equal(t, 3, l.Count())
 	//
 	//assert.Equal(t, 1, l.GetAt(0).Value)
 	//assert.Equal(t, 2, l.GetAt(1).Value)
