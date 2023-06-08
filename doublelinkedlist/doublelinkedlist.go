@@ -156,3 +156,50 @@ func (l *LinkedList[T]) PopFront() *Node[T] {
 	l.count--
 	return root
 }
+
+func (l *LinkedList[T]) PopBack() *Node[T] {
+	if l.tail == nil {
+		return nil
+	}
+
+	tail := l.tail
+	l.tail = tail.prev
+	if l.tail != nil {
+		l.tail.next = nil
+	} else {
+		l.root = nil
+	}
+	tail.prev = nil
+
+	l.count--
+	return tail
+}
+
+func (l *LinkedList[T]) Remove(node *Node[T]) {
+	if node == l.root {
+		l.PopFront()
+		return
+	}
+
+	if node == l.tail {
+		l.PopBack()
+		return
+	}
+
+	if !l.isIncluded(node) {
+		return
+	}
+
+	prev := node.prev
+	next := node.next
+	if prev != nil {
+		prev.next = next
+	}
+	if next != nil {
+		next.prev = prev
+	}
+
+	node.next, node.prev = nil, nil
+	l.count--
+
+}
