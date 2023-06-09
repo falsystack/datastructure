@@ -203,3 +203,20 @@ func (l *LinkedList[T]) Remove(node *Node[T]) {
 	l.count--
 
 }
+
+func (l *LinkedList[T]) Reverse() {
+	if l.root == nil {
+		return
+	}
+
+	// 最初のノードから回しながらリンクを変える
+	for i := l.root; i != nil; {
+		// 次のノードを保存しておく必要がある。
+		next := i.next
+		// swap
+		i.prev, i.next = i.next, i.prev
+		i = next
+	}
+
+	l.root, l.tail = l.tail, l.root
+}
